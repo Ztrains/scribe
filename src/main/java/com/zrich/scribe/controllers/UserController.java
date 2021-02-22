@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
+@SuppressWarnings("all")
 public class UserController {
 
     UserService userService;
@@ -33,7 +34,7 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") int id) {
         return userService.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id" + id + " not found."));
+                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
     }
 
     @PostMapping("/")
@@ -44,7 +45,7 @@ public class UserController {
     @PutMapping("/{id}")
     public User updateUser(@PathVariable("id") int id, @RequestBody User newUsr) {
         User usr = userService.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id" + id + " not found."));
+                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
 
         usr.setName(newUsr.getName());
         usr.setEmail(newUsr.getEmail());
@@ -55,7 +56,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         User usr = userService.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id" + id + " not found."));
+                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
 
         userService.deleteById(usr.getId());
         return "User with id " + id + " is deleted";

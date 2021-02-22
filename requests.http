@@ -1,0 +1,30 @@
+
+GET http://localhost:8080/users/
+
+###
+
+GET http://localhost:8080/users/1
+
+###
+
+POST http://localhost:8080/users/
+content-type: application/json
+
+{
+    "name": "deletemetest",
+    "email": "deletemetest"
+}
+
+###
+
+PUT http://localhost:8080/users/4
+content-type: application/json
+
+{
+    "name": "deletemetestput",
+    "email": "deletemetestput"
+}
+
+###
+
+DELETE http://localhost:8080/users/4
