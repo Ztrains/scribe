@@ -2,7 +2,7 @@ package com.zrich.scribe.controllers;
 
 import java.util.List;
 
-import com.zrich.scribe.exceptions.UserNotFoundException;
+import com.zrich.scribe.exceptions.EntityNotFoundException;
 import com.zrich.scribe.models.User;
 import com.zrich.scribe.services.UserService;
 
@@ -34,7 +34,7 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") int id) {
         return userService.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found."));
     }
 
     @PostMapping("/")
@@ -45,7 +45,7 @@ public class UserController {
     @PutMapping("/{id}")
     public User updateUser(@PathVariable("id") int id, @RequestBody User newUsr) {
         User usr = userService.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found."));
 
         usr.setName(newUsr.getName());
         usr.setEmail(newUsr.getEmail());
@@ -56,7 +56,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         User usr = userService.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found."));
 
         userService.deleteById(usr.getId());
         return "User with id " + id + " is deleted";

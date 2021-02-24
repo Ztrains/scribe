@@ -9,13 +9,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class UserNotFoundException extends RuntimeException {
+public class EntityNotFoundException extends RuntimeException {
     
     private static final long serialVersionUID = 1L;
 
     private final String message;
 
-    public UserNotFoundException(String message) {
+    public EntityNotFoundException(String message) {
         this.message = message;
     }
 }

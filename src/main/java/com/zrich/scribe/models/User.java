@@ -2,9 +2,7 @@ package com.zrich.scribe.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 
 import lombok.Data;
 
@@ -13,7 +11,7 @@ import lombok.Data;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private int id;
 
     private String name;

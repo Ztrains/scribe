@@ -1,0 +1,38 @@
+
+GET http://localhost:8080/todos/
+
+###
+
+GET http://localhost:8080/todos/prio/HIGH
+
+###
+
+GET http://localhost:8080/todos/?date=2021-02-24
+
+###
+
+GET http://localhost:8080/todos/id/11
+
+###
+
+POST http://localhost:8080/todos/
+content-type: application/json
+
+{
+    "task": "make a task",
+    "priority": 2
+}
+
+###
+
+PUT http://localhost:8080/todos/7
+content-type: application/json
+
+{
+    "task": "Medium priority test PUT",
+    "priority": 1
+}
+
+###
+
+DELETE http://localhost:8080/todos/6
