@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head> 
+	<title>Scribe</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" href="normalize.css">
+  	<link rel="stylesheet" href="skeleton.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Todos</h1>
+		<table class="u-full-width" aria-describedby="todos">
+			<thead>
+				<tr>
+					<th scope="col">id</th>
+					<th scope="col">task</th>
+					<th scope="col">priority</th>
+					<th scope="col">created date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="todo : ${todos}">
+					<td th:text="${todo.id}"></td>
+					<td th:text="${todo.task}"></td>
+					<td th:text="${todo.priority}"></td>
+					<td th:text="${todo.createdAt}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<hr/>
+		<form th:action="@{/todos/web}" method="post" th:object="${todo}">
+			<div class="row">
+				<div class="six columns">
+				  	<label for="taskInput">Task</label>
+				  	<input class="u-full-width" type="text" id="taskInput" name="task">
+				</div>
+				<div class="six columns">
+				  	<label for="priorityInput">Priority</label>
+				  	<select class="u-full-width" id="priorityInput" name="priority">
+						<option value="LOW">low</option>
+						<option value="MEDIUM">medium</option>
+						<option value="HIGH">high</option>
+				  	</select>
+				</div>
+			</div>
+			<input class="button-primary" type="submit" value="Create todo" />
+		</form>
+	</div>
+</body>
+</html>

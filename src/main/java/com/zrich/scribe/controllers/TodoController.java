@@ -9,6 +9,7 @@ import com.zrich.scribe.models.Todo;
 import com.zrich.scribe.services.TodoService;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("/todos")
@@ -31,7 +33,7 @@ public class TodoController {
     }
 
     // List<Todo>
-    @GetMapping("/")
+    @GetMapping
     public List<Todo> getAllTodos() {
         return todoService.getAllTodos();
     }
@@ -41,7 +43,7 @@ public class TodoController {
         return todoService.getTodosByPriority(prio);
     }
 
-    @GetMapping(path = "/", params = "date")
+    @GetMapping(params = "date")
     public List<Todo> getTodosByDate(@RequestParam("date") 
                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) 
                                      LocalDate date) {
@@ -56,9 +58,15 @@ public class TodoController {
                 .orElseThrow(() -> new EntityNotFoundException("Todo with id " + id + " not found."));
     }
 
-    @PostMapping("/")
+    @PostMapping
     public Todo addTodo(@RequestBody Todo todo) {
         return todoService.save(todo);
+    }
+
+    @PostMapping("/web")
+    public RedirectView addTodoBrowser(Todo todo) {
+        todoService.save(todo);
+        return new RedirectView("http://localhost:8080/scribe");
     }
 
     @PutMapping("/{id}")

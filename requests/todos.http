@@ -7,7 +7,7 @@ GET http://localhost:8080/todos/prio/HIGH
 
 ###
 
-GET http://localhost:8080/todos/?date=2021-02-24
+GET http://localhost:8080/todos?date=2021-02-24
 
 ###
 
