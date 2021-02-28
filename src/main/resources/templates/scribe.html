@@ -4,12 +4,23 @@
 	<title>Scribe</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-	<link rel="stylesheet" href="normalize.css">
-  	<link rel="stylesheet" href="skeleton.css">
+	<link rel="stylesheet" th:href="@{normalize.css}">
+  	<link rel="stylesheet" th:href="@{skeleton.css}">
 </head>
 <body>
-	<div class="container">
-		<h1>Todos</h1>
+	<div class="container" style="margin-top: 6em;">
+
+		<form th:action="@{/logout}" method="post">
+			<div class="row">
+				<div class="ten columns">
+					<h1>Todos</h1>
+				</div>
+				<div class="two columns">
+					<input class="button" type="submit" value="logout" id="logout" />
+			</div>
+			</div>
+		</form>
+
 		<table class="u-full-width" aria-describedby="todos">
 			<thead>
 				<tr>
@@ -28,14 +39,14 @@
 				</tr>
 			</tbody>
 		</table>
-		<hr/>
+
 		<form th:action="@{/todos/web}" method="post" th:object="${todo}">
 			<div class="row">
 				<div class="six columns">
 				  	<label for="taskInput">Task</label>
 				  	<input class="u-full-width" type="text" id="taskInput" name="task">
 				</div>
-				<div class="six columns">
+				<div class="two columns">
 				  	<label for="priorityInput">Priority</label>
 				  	<select class="u-full-width" id="priorityInput" name="priority">
 						<option value="LOW">low</option>
@@ -43,8 +54,12 @@
 						<option value="HIGH">high</option>
 				  	</select>
 				</div>
+				<div class="four columns">
+					<label for="buttonInput">&nbsp;</label>
+					<input class="button-primary" type="submit" value="Create todo" id="buttonInput" />
+				</div>
 			</div>
-			<input class="button-primary" type="submit" value="Create todo" />
+			
 		</form>
 	</div>
 </body>

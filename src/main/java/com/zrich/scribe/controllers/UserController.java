@@ -43,12 +43,11 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable("id") int id, @RequestBody User newUsr) {
+    public User updateUser(@PathVariable("id") int id, @RequestBody String newPassword) {
         User usr = userService.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found."));
 
-        usr.setName(newUsr.getName());
-        usr.setEmail(newUsr.getEmail());
+        usr.setPassword(newPassword);
 
         return userService.save(usr);
     }

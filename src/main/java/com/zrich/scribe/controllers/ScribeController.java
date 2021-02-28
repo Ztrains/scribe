@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/scribe")
 @SuppressWarnings("all")
-public class HomeController {
+public class ScribeController {
 
     @Autowired
     TodoService todoService;
     
     @GetMapping
-    public String scribePage(Model model) {
+    public String scribeView(Model model) {
         model.addAttribute("todos", todoService.getAllTodos());
         return "scribe";
     }
+
 }
