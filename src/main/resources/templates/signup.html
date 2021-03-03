@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Scribe - Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" th:href="@{css/normalize.css}">
+    <link rel="stylesheet" th:href="@{css/skeleton.css}">
+</head>
+<body>
+    <div class="container" style="margin-top: 12em;">
+        
+        <div class="row">
+			<div class="one-third column">&nbsp;</div>
+			<div class="two-thirds column">
+				  <h3>Sign Up</h6>
+			</div>
+		</div>
+
+        <form th:action="@{/signup}" method="post" th:object="${user}" autocomplete="off">
+			<div class="row">
+				<div class="one-third column">&nbsp;</div>
+				<div class="two-thirds column">
+				  	<label for="username">Username</label>
+				  	<input style="width: 50%;" th:field="*{username}" type="text" id="username" name="username" autofocus>
+				</div>
+            </div>
+            <div class="row">
+				<div class="one-third column">&nbsp;</div>
+				<div class="two-thirds column">
+                    <label for="password">Password</label>
+                    <input style="width: 50%;" th:field="*{password}" type="password" id="password" name="password">
+              </div>
+			</div>
+			<div class="row">
+				<div class="one-third column">&nbsp;</div>
+                <div class="two-thirds column">
+					<label for="buttonInput">&nbsp;</label>
+					<input style="width: 50%;" class="button-primary" type="submit" value="Create Account" id="buttonInput" />
+				</div>
+			</div>
+		</form>
+    </div>
+</body>
+</html>

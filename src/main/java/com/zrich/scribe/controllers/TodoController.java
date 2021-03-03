@@ -6,9 +6,14 @@ import java.util.List;
 import com.zrich.scribe.enums.Priority;
 import com.zrich.scribe.exceptions.EntityNotFoundException;
 import com.zrich.scribe.models.Todo;
+import com.zrich.scribe.models.User;
 import com.zrich.scribe.services.TodoService;
+import com.zrich.scribe.services.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,16 +25,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/todos")
 @SuppressWarnings("all")
+@Slf4j
 public class TodoController {
 
+    @Autowired
     TodoService todoService;
 
-    public TodoController(TodoService todoService) {
-        this.todoService = todoService;
-    }
+    @Autowired
+    UserService userService;
 
     // List<Todo>
     @GetMapping
@@ -42,6 +50,7 @@ public class TodoController {
         return todoService.getTodosByPriority(prio);
     }
 
+    // TODO: create view for this (just param on scribe view maybe?)
     @GetMapping(params = "date")
     public List<Todo> getTodosByDate(@RequestParam("date") 
                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) 
@@ -63,7 +72,14 @@ public class TodoController {
     }
 
     @PostMapping("/web")
-    public RedirectView addTodoBrowser(Todo todo) {
+    public RedirectView addTodoBrowser(Todo todo, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userService.findByUsername(userDetails.getUsername());
+
+        todo.setUser(user);
+
+        log.info("adding todo for userid {}", todo.getUser().getId());
+
         todoService.save(todo);
         return new RedirectView("http://localhost:8080/scribe");
     }

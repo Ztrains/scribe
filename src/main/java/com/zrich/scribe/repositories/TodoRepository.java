@@ -16,4 +16,6 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
 
     List<Todo> findAllByCreatedAt(LocalDate createdAt);
 
+    List<Todo> findAllByUserId(Integer priority);
+
 }

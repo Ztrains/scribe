@@ -42,16 +42,15 @@ public class UserController {
         return userService.save(usr);
     }
 
-    @PutMapping("/{id}")
+    // TODO: make a meaningful update route or two
+    /* @PutMapping("/{id}")
     public User updateUser(@PathVariable("id") int id, @RequestBody User newUsr) {
         User usr = userService.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found."));
 
-        usr.setName(newUsr.getName());
-        usr.setEmail(newUsr.getEmail());
-
+        
         return userService.save(usr);
-    }
+    } */
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id) {

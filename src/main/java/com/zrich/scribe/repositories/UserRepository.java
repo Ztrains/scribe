@@ -1,7 +1,5 @@
 package com.zrich.scribe.repositories;
 
-import java.util.Optional;
-
 import com.zrich.scribe.models.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     // Query method
-    Optional<User> findByEmail(String email);
+    User findByUsername(String username);
 
 }
